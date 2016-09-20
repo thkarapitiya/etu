@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PatientEditDlg" widgetVar="PatientEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPatientTitle}">
+            <h:form id="PatientEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{patientController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPatientLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{patientController.selected.id}" title="#{bundle.EditPatientTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditPatientLabel_sname}" for="sname" />
+                        <p:inputText id="sname" value="#{patientController.selected.sname}" title="#{bundle.EditPatientTitle_sname}" />
+                        <p:outputLabel value="#{bundle.EditPatientLabel_tname}" for="tname" />
+                        <p:inputText id="tname" value="#{patientController.selected.tname}" title="#{bundle.EditPatientTitle_tname}" />
+                        <p:outputLabel value="#{bundle.EditPatientLabel_ename}" for="ename" />
+                        <p:inputText id="ename" value="#{patientController.selected.ename}" title="#{bundle.EditPatientTitle_ename}" />
+                        <p:outputLabel value="#{bundle.EditPatientLabel_bhtNo}" for="bhtNo" />
+                        <p:inputText id="bhtNo" value="#{patientController.selected.bhtNo}" title="#{bundle.EditPatientTitle_bhtNo}" />
+                        <p:outputLabel value="#{bundle.EditPatientLabel_age}" for="age" />
+                        <p:inputText id="age" value="#{patientController.selected.age}" title="#{bundle.EditPatientTitle_age}" />
+                        <p:outputLabel value="#{bundle.EditPatientLabel_gender}" for="gender" />
+                        <p:inputText id="gender" value="#{patientController.selected.gender}" title="#{bundle.EditPatientTitle_gender}" />
+                        <p:outputLabel value="#{bundle.EditPatientLabel_area}" for="area" />
+                        <p:selectOneMenu id="area" value="#{patientController.selected.area}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"
+                                           var="areaItem"
+                                           itemValue="#{areaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPatientLabel_patientCondition}" for="patientCondition" />
+                        <p:selectOneMenu id="patientCondition" value="#{patientController.selected.patientCondition}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"
+                                           var="patientConditionItem"
+                                           itemValue="#{patientConditionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPatientLabel_triageCategory}" for="triageCategory" />
+                        <p:selectOneMenu id="triageCategory" value="#{patientController.selected.triageCategory}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"
+                                           var="triageCategoryItem"
+                                           itemValue="#{triageCategoryItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPatientLabel_department}" for="department" />
+                        <p:selectOneMenu id="department" value="#{patientController.selected.department}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departmentController.itemsAvailableSelectOne}"
+                                           var="departmentItem"
+                                           itemValue="#{departmentItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPatientLabel_unit}" for="unit" />
+                        <p:selectOneMenu id="unit" value="#{patientController.selected.unit}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{unitController.itemsAvailableSelectOne}"
+                                           var="unitItem"
+                                           itemValue="#{unitItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditPatientLabel_outcome}" for="outcome" />
+                        <p:inputText id="outcome" value="#{patientController.selected.outcome}" title="#{bundle.EditPatientTitle_outcome}" />
+                        <p:outputLabel value="#{bundle.EditPatientLabel_investigation}" for="investigation" />
+                        <p:inputText id="investigation" value="#{patientController.selected.investigation}" title="#{bundle.EditPatientTitle_investigation}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{patientController.update}" value="#{bundle.Save}" update="display,:PatientListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PatientEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PatientEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

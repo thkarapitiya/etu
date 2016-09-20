@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <ui:insert name="top">
+            <title>ETU</title>
+        </ui:insert>
+    </h:head>
+
+    <h:body>
+
+        <p:layout fullPage="true" >
+
+            <p:layoutUnit position="north" >
+                <ui:insert name="top">
+
+
+                </ui:insert>
+            </p:layoutUnit>
+            <p:layoutUnit position="center" >
+                <ui:insert name="menu">
+                    <p:growl id="growl" autoUpdate="true" ></p:growl>
+                    <h:form >
+                        <p:menubar >
+                            <p:submenu label="Administration" >
+                                <p:menuitem ajax="false" action="/admin_index" value="Adminstration" ></p:menuitem>
+                            </p:submenu>
+                        </p:menubar>
+                    </h:form>
+                </ui:insert>
+                <ui:insert name="body">
+
+                </ui:insert>
+            </p:layoutUnit>
+            <p:layoutUnit position="south" >
+                <ui:insert name="bottom">
+
+                    <div style="color: red;float: right;" >
+                        <h:form >
+                            <table >
+                                <tr>
+                                    <td>
+                                        <h:commandLink value="#{bundle.Sname}" action="#{languageController.makeLanguageSinhala()}" rendered="#{languageController.language ne 'si'}" ></h:commandLink>
+                                    </td>
+                                    <td>
+                                        <h:outputLabel value="|"  rendered="#{languageController.language eq 'en'}"></h:outputLabel>
+                                    </td>
+                                    <td>
+                                        <h:commandLink value="#{bundle.LanNameTamil}" action="#{languageController.makeLanguageTamil()}" rendered="#{languageController.language ne 'ta'}"></h:commandLink>
+                                    </td>
+                                    <td>
+                                        <h:outputLabel value="|"  rendered="#{languageController.language ne 'en'}"></h:outputLabel>
+                                    </td>
+                                    <td>
+                                        <h:commandLink value="#{bundle.LanNameEnglish}" action="#{languageController.makeLanguageEnglish()}" rendered="#{languageController.language ne 'en'}"></h:commandLink>
+                                    </td>
+                                </tr>
+                            </table>
+                        </h:form>
+                    </div>
+                </ui:insert>
+            </p:layoutUnit>
+
+        </p:layout>
+
+
+
+    </h:body>
+
+</html>

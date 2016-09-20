@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="/template.xhtml">
+
+            <ui:define name="body">
+                <p:panel header="Administration Index" >
+                    <h:form >
+                        <p:panelGrid columns="1" >
+                            <p:commandLink ajax="false" value="Categories" action="/category/List" ></p:commandLink>
+                            <p:commandLink ajax="false" value="Units" action="/unit/List" ></p:commandLink>
+                            <p:commandLink ajax="false" value="Departments" action="/department/List" ></p:commandLink>
+                            <p:commandLink ajax="false" value="Beds" action="/beds/List" ></p:commandLink>
+                            <p:commandLink ajax="false" value="Users" action="/webUser/List" ></p:commandLink>
+                        </p:panelGrid>
+                    </h:form>
+
+                </p:panel>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

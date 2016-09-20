@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view locale="#{languageController.language}">
+        <ui:composition>
+
+            <p:dialog id="CategoryEditDlg" widgetVar="CategoryEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.Edit}">
+                <h:form id="CategoryEditForm">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{categoryController.selected != null}">
+                            <p:outputLabel value="#{bundle.Sname}" for="sname" />
+                            <p:inputText id="sname" value="#{categoryController.selected.sname}" title="#{bundle.Sname}" />
+                            <p:outputLabel value="#{bundle.Tname}" for="tname" />
+                            <p:inputText id="tname" value="#{categoryController.selected.tname}" title="#{bundle.Tname}" />
+                            <p:outputLabel value="#{bundle.Ename}" for="ename" />
+                            <p:inputText id="ename" value="#{categoryController.selected.ename}" title="#{bundle.Ename}" />
+                            <p:outputLabel value="#{bundle.Type}"  />
+                            <p:selectOneMenu id="category" value="#{categoryController.selected.type}" required="true" >
+                                <f:selectItem itemLabel="select one"/>
+                                <f:selectItems value="#{enumController.categoryValues}"
+                                               itemLabel="#{categoryController.label}"/>
+                            </p:selectOneMenu>
+                        </p:panelGrid>
+                        <p:commandButton ajax="false" actionListener="#{categoryController.update}" value="#{bundle.Save}" update="display,:CategoryListForm:datalist,:growl" oncomplete="handleSubmit(args, 'CategoryEditDialog');"/>
+                        <p:commandButton ajax="false" value="#{bundle.Cancel}" onclick="CategoryEditDialog.hide()"/>
+                    </h:panelGroup>
+                </h:form>
+            </p:dialog>
+
+        </ui:composition></f:view>
+</html>

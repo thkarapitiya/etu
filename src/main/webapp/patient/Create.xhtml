@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PatientCreateDlg" widgetVar="PatientCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePatientTitle}">
+            <h:form id="PatientCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{patientController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePatientLabel_sname}" for="sname" />
+                        <p:inputText id="sname" value="#{patientController.selected.sname}" title="#{bundle.CreatePatientTitle_sname}" />
+                        <p:outputLabel value="#{bundle.CreatePatientLabel_tname}" for="tname" />
+                        <p:inputText id="tname" value="#{patientController.selected.tname}" title="#{bundle.CreatePatientTitle_tname}" />
+                        <p:outputLabel value="#{bundle.CreatePatientLabel_ename}" for="ename" />
+                        <p:inputText id="ename" value="#{patientController.selected.ename}" title="#{bundle.CreatePatientTitle_ename}" />
+                        <p:outputLabel value="#{bundle.CreatePatientLabel_bhtNo}" for="bhtNo" />
+                        <p:inputText id="bhtNo" value="#{patientController.selected.bhtNo}" title="#{bundle.CreatePatientTitle_bhtNo}" />
+                        <p:outputLabel value="#{bundle.CreatePatientLabel_age}" for="age" />
+                        <p:inputText id="age" value="#{patientController.selected.age}" title="#{bundle.CreatePatientTitle_age}" />
+                        <p:outputLabel value="#{bundle.CreatePatientLabel_gender}" for="gender" />
+                        <p:selectOneMenu id="gender" value="#{patientController.selected.gender}" >
+                             <f:selectItem itemLabel="select one"/>
+                            <f:selectItems value="#{enumController.genderValues}"
+                                           var="genderItem"
+                                           itemValue="#{genderItem}"
+                                           itemLabel="#{genderItem}"/>
+                        </p:selectOneMenu> 
+                        <p:outputLabel value="#{bundle.CreatePatientLabel_area}" for="area" />
+                        <p:selectOneMenu id="area" value="#{patientController.selected.area}" >
+                             <f:selectItem itemLabel="select one"/>
+                            <f:selectItems value="#{categoryController.areas}"
+                                           var="areaItem"
+                                           itemValue="#{areaItem}"
+                                           itemLabel="#{areaItem.ename}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreatePatientLabel_patientCondition}" for="patientCondition" />
+                        <p:selectOneMenu id="patientCondition" value="#{patientController.selected.patientCondition}" >
+                            <f:selectItem itemLabel="select one"/>
+                            <f:selectItems value="#{categoryController.patientConditions}"
+                                           var="patientConditionItem"
+                                           itemValue="#{patientConditionItem}"
+                                           itemLabel="#{patientConditionItem.ename}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreatePatientLabel_triageCategory}" for="triageCategory" />
+                        <p:selectOneMenu id="triageCategory" value="#{patientController.selected.triageCategory}" >
+                             <f:selectItem itemLabel="select one"/>
+                            <f:selectItems value="#{categoryController.triageCategories}"
+                                           var="triageCategoryItem"
+                                           itemValue="#{triageCategoryItem}"
+                                           itemLabel="#{triageCategoryItem.ename}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreatePatientLabel_department}" for="department" />
+                        <p:selectOneMenu id="department" value="#{patientController.selected.department}" >
+                            <f:selectItems value="#{departmentController.itemsAvailableSelectOne}"
+                                           var="departmentItem"
+                                           itemValue="#{departmentItem}"
+                                           itemLabel="#{departmentItem.ename}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreatePatientLabel_unit}" for="unit" />
+                        <p:selectOneMenu id="unit" value="#{patientController.selected.unit}" >
+                            <f:selectItems value="#{unitController.itemsAvailableSelectOne}"
+                                           var="unitItem"
+                                           itemValue="#{unitItem}"
+                                           itemLabel="#{unitItem.ename}"/>
+                        </p:selectOneMenu>
+                       <p:outputLabel value="#{bundle.CreatePatientLabel_outcome}" for="outcome" />
+                       <p:selectOneMenu id="outcome" value="#{patientController.selected.outcome}" >
+                             <f:selectItem itemLabel="select one"/>
+                             <f:selectItems value="#{enumController.patientsOutcomes}"
+                                           var="outcome"
+                                           itemValue="#{outcome}"
+                                           itemLabel="#{outcome}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreatePatientLabel_investigation}" for="investigation" />
+                        <p:selectOneMenu id="investigation" value="#{patientController.selected.investigation}" >
+                             <f:selectItem itemLabel="select one"/>
+                             <f:selectItems value="#{enumController.patientsInvestigations}"
+                                           var="investigation"
+                                           itemValue="#{investigation}"
+                                           itemLabel="#{investigation}"/>
+                        </p:selectOneMenu>
+                        
+                        </p:panelGrid>
+                    <p:commandButton actionListener="#{patientController.create}" value="#{bundle.Save}" update="display,:PatientListForm:datalist,:growl" oncomplete="handleSubmit(args,'PatientCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PatientCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
