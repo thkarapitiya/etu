@@ -34,6 +34,17 @@ public class WebUser implements Serializable {
     private String email;
     @Enumerated(EnumType.STRING)
     private WebUSerPrivilege webUSerPrivilege;
+    Unit unit;
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+    
+    
 
     public Long getId() {
         return id;

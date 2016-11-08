@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./template.xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="body">
+        
+        <f:view>
+
+            
+
+            <h:form>
+                <h1><h:outputText value="#{bundle.Admit}"/></h1>
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="#{bundle.sname}" for="sname" />
+                    <p:inputText id="sname" value="#{patientController.selected.sname}" title="#{bundle.sname}" />
+                    <p:outputLabel value="#{bundle.tname}" for="tname" />
+                    <p:inputText id="tname" value="#{patientController.selected.tname}" title="Name in Tamil" />
+                    <p:outputLabel value="#{bundle.ename}" for="ename" />
+                    <p:inputText id="ename" value="#{patientController.selected.ename}" title="Ename" />
+                    <p:outputLabel value="#{bundle.bhtNo}" for="bhtNo" />
+                    <p:inputText id="bhtNo" value="#{patientController.selected.bhtNo}" title="BhtNo" />
+                    <p:outputLabel value="#{bundle.age}" for="age" />
+                    <p:inputText id="age" value="#{patientController.selected.age}" title="Age" />
+                    <p:outputLabel value="#{bundle.gender}" for="gender" />
+                    <p:inputText id="gender" value="#{patientController.selected.gender}" title="Gender" />
+                    <p:outputLabel value="#{bundle.area}" for="area" />
+                    <p:selectOneMenu id="area" value="#{patientController.selected.area}" >
+                        <f:selectItems value="#{categoryController.areas}" var="a" itemLabel="#{a.ename}" itemValue="#{a}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="PatientCondition:" for="patientCondition" />
+                    <p:selectOneMenu id="patientCondition" value="#{patientController.selected.patientCondition}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{fixme}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="TriageCategory:" for="triageCategory" />
+                    <p:selectOneMenu id="triageCategory" value="#{patientController.selected.triageCategory}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{fixme}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Department:" for="department" />
+                    <p:selectOneMenu id="department" value="#{patientController.selected.department}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{fixme}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Unit:" for="unit" />
+                    <p:selectOneMenu id="unit" value="#{patientController.selected.unit}" >
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{fixme}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Outcome:" for="outcome" />
+                    <p:inputText id="outcome" value="#{patientController.selected.outcome}" title="Outcome" />
+                    <p:outputLabel value="Investigation:" for="investigation" />
+                    <p:inputText id="investigation" value="#{patientController.selected.investigation}" title="Investigation" />
+                </p:panelGrid>
+            </h:form>
+        </f:view>
+
+        
+    </ui:define>
+
+</ui:composition>

@@ -12,13 +12,15 @@
             <h:form id="DepartmentCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{departmentController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateDepartmentLabel_sname}" for="sname" />
-                        <p:inputText id="sname" value="#{departmentController.selected.sname}" title="#{bundle.CreateDepartmentTitle_sname}" />
-                        <p:outputLabel value="#{bundle.CreateDepartmentLabel_tname}" for="tname" />
-                        <p:inputText id="tname" value="#{departmentController.selected.tname}" title="#{bundle.CreateDepartmentTitle_tname}" />
-                        <p:outputLabel value="#{bundle.CreateDepartmentLabel_ename}" for="ename" />
-                        <p:inputText id="ename" value="#{departmentController.selected.ename}" title="#{bundle.CreateDepartmentTitle_ename}" />
-                        <p:outputLabel value="#{bundle.CreateDepartmentLabel_unit}" for="unit" />
+                        <p:outputLabel value="#{bundle.sname}" for="sname" />
+                        <p:inputText id="sname" value="#{departmentController.selected.sname}" 
+                                     title="#{bundle.sname}" />
+                        <p:outputLabel value="#{bundle.tname}" for="tname" />
+                        <p:inputText id="tname" value="#{departmentController.selected.tname}" 
+                                     title="#{bundle.tname}" />
+                        <p:outputLabel value="#{bundle.ename}" for="ename" />
+                        <p:inputText id="ename" value="#{departmentController.selected.ename}" title="#{bundle.ename}" />
+                        <p:outputLabel value="#{bundle.Unit}" for="unit" />
                         <p:selectOneMenu id="unit" value="#{departmentController.selected.unit}" >
                             <f:selectItem itemLabel="select one"/>
                             <f:selectItems value="#{unitController.itemsAvailableSelectOne}"
@@ -26,7 +28,7 @@
                                            itemValue="#{unitItem}"
                                            itemLabel="#{unitItem.ename}"/>
                         </p:selectOneMenu>
-                         </p:panelGrid>
+                    </p:panelGrid>
                     <p:commandButton actionListener="#{departmentController.create}" value="#{bundle.Save}" update="display,:DepartmentListForm:datalist,:growl" oncomplete="handleSubmit(args,'DepartmentCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="DepartmentCreateDialog.hide()"/>
                 </h:panelGroup>

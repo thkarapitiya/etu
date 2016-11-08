@@ -29,6 +29,9 @@
                     <p:growl id="growl" autoUpdate="true" ></p:growl>
                     <h:form >
                         <p:menubar >
+                            <p:submenu label="Admissions" >
+                                <p:menuitem ajax="false" action="#{patientController.admit()}" value="Admit" ></p:menuitem>
+                            </p:submenu>
                             <p:submenu label="Administration" >
                                 <p:menuitem ajax="false" action="/admin_index" value="Adminstration" ></p:menuitem>
                             </p:submenu>
@@ -39,7 +42,7 @@
 
                 </ui:insert>
             </p:layoutUnit>
-            <p:layoutUnit position="south" >
+            <p:layoutUnit position="south" collapsible="false" size="40" >
                 <ui:insert name="bottom">
 
                     <div style="color: red;float: right;" >
@@ -47,19 +50,19 @@
                             <table >
                                 <tr>
                                     <td>
-                                        <h:commandLink value="#{bundle.Sname}" action="#{languageController.makeLanguageSinhala()}" rendered="#{languageController.language ne 'si'}" ></h:commandLink>
+                                        <h:commandLink value="#{bundle.makeLanguageSinhala}" action="#{languageController.makeLanguageSinhala()}" rendered="#{languageController.language ne 'si'}" ></h:commandLink>
                                     </td>
                                     <td>
                                         <h:outputLabel value="|"  rendered="#{languageController.language eq 'en'}"></h:outputLabel>
                                     </td>
                                     <td>
-                                        <h:commandLink value="#{bundle.LanNameTamil}" action="#{languageController.makeLanguageTamil()}" rendered="#{languageController.language ne 'ta'}"></h:commandLink>
+                                        <h:commandLink value="#{bundle.makeLanguageTamil}" action="#{languageController.makeLanguageTamil()}" rendered="#{languageController.language ne 'ta'}"></h:commandLink>
                                     </td>
                                     <td>
                                         <h:outputLabel value="|"  rendered="#{languageController.language ne 'en'}"></h:outputLabel>
                                     </td>
                                     <td>
-                                        <h:commandLink value="#{bundle.LanNameEnglish}" action="#{languageController.makeLanguageEnglish()}" rendered="#{languageController.language ne 'en'}"></h:commandLink>
+                                        <h:commandLink value="#{bundle.makeLanguageEnglish}" action="#{languageController.makeLanguageEnglish()}" rendered="#{languageController.language ne 'en'}"></h:commandLink>
                                     </td>
                                 </tr>
                             </table>

@@ -18,6 +18,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("patientController")
 @SessionScoped
@@ -25,6 +26,8 @@ public class PatientController implements Serializable {
 
     @EJB
     private etu.sessionbean.PatientFacade ejbFacade;
+    @Inject
+    WebUserController webUserController;
     private List<Patient> items = null;
     private Patient selected;
 
@@ -60,6 +63,12 @@ public class PatientController implements Serializable {
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
+    }
+    
+     public String admit() {
+        selected = new Patient();
+        selected.setActive(true);
+        return "/admit";
     }
 
     public void update() {
