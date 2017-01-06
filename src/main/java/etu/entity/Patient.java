@@ -9,6 +9,7 @@ import etu.enums.Gender;
 import etu.enums.Investigation;
 import etu.enums.Outcome;
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -53,6 +55,20 @@ public class Patient implements Serializable {
     @Enumerated(EnumType.STRING)
     private Investigation investigation;
 
+    @Temporal(javax.persistence.TemporalType.DATE)
+    Date dob;
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public void setDob(Date dob) {
+        this.dob = dob;
+    }
+    
+    
+    
+    
     public Long getId() {
         return id;
     }

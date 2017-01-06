@@ -3,10 +3,15 @@ package etu.controller;
 import etu.entity.WebUser;
 import etu.controller.util.JsfUtil;
 import etu.controller.util.JsfUtil.PersistAction;
+import etu.entity.Department;
+import etu.entity.Unit;
 import etu.sessionbean.WebUserFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +32,42 @@ public class WebUserController implements Serializable {
     private etu.sessionbean.WebUserFacade ejbFacade;
     private List<WebUser> items = null;
     private WebUser selected;
+
+    WebUser loggedUser;
+    Unit loggedUnit;
+    List<Department> loggedDepartments;
+    boolean logged = false;
+
+    String userName;
+    String password;
+
+    public void login() {
+        String j = "Select u from WebUser where upper(u.username)=:un and  u.password=:up order by u.id desc";
+        Map m = new HashMap();
+        m.put("un", userName);
+        m.put("up", password);
+        loggedUser = getFacade().findFirstBySQL(j, m);
+        if (loggedUser == null) {
+            JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("wrongLoginMessage"));
+            resetLoginData();
+            return;
+        }
+        logged=true;
+        loggedUnit = loggedUser.getUnit();
+        
+    }
+
+    public void logout() {
+        resetLoginData();
+        JsfUtil.addErrorMessage(ResourceBundle.getBundle("/Bundle").getString("logoutSuccessMessage"));
+    }
+
+    private void resetLoginData() {
+        logged = false;
+        loggedDepartments = new ArrayList<Department>();
+        loggedUnit = null;
+        loggedUser = null;
+    }
 
     public WebUserController() {
     }
@@ -107,6 +148,30 @@ public class WebUserController implements Serializable {
                 JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             }
         }
+    }
+
+    public WebUser getLoggedUser() {
+        return loggedUser;
+    }
+
+    public void setLoggedUser(WebUser loggedUser) {
+        this.loggedUser = loggedUser;
+    }
+
+    public Unit getLoggedUnit() {
+        return loggedUnit;
+    }
+
+    public void setLoggedUnit(Unit loggedUnit) {
+        this.loggedUnit = loggedUnit;
+    }
+
+    public List<Department> getLoggedDepartments() {
+        return loggedDepartments;
+    }
+
+    public void setLoggedDepartments(List<Department> loggedDepartments) {
+        this.loggedDepartments = loggedDepartments;
     }
 
     public WebUser getWebUser(java.lang.Long id) {
