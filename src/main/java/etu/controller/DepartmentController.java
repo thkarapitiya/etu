@@ -3,10 +3,13 @@ package etu.controller;
 import etu.entity.Department;
 import etu.controller.util.JsfUtil;
 import etu.controller.util.JsfUtil.PersistAction;
+import etu.entity.Unit;
 import etu.sessionbean.DepartmentFacade;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,7 +29,6 @@ public class DepartmentController implements Serializable {
     @EJB
     private etu.sessionbean.DepartmentFacade ejbFacade;
     private List<Department> items = null;
-    private List<Department> myItems = null;
     private Department selected;
 
     public DepartmentController() {
@@ -81,11 +83,13 @@ public class DepartmentController implements Serializable {
         }
         return items;
     }
-    
-    public List<Department> getMyDepartments() {
-        if (myItems == null) {
-            myItems = getFacade().findAll();
-        }
+
+    public List<Department> getDepartments(Unit unit) {
+        List<Department> myItems = null;
+        String j = "Select d from Department d where d.unit=:unit order by d.ename";
+        Map m = new HashMap();
+        m.put("unit", unit);
+        myItems = getFacade().findBySQL(j, m);
         return myItems;
     }
 

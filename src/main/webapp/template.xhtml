@@ -28,7 +28,7 @@
                 <ui:insert name="menu">
                     <p:growl id="growl" autoUpdate="true" ></p:growl>
                     <h:form >
-                        <p:menubar >
+                        <p:menubar id="loggedMenu" rendered="#{webUserController.logged}" >
                             <p:submenu label="Admissions" >
                                 <p:menuitem ajax="false" action="#{patientController.admit()}" value="Admit" ></p:menuitem>
                             </p:submenu>
@@ -38,7 +38,24 @@
                         </p:menubar>
                     </h:form>
                 </ui:insert>
-                <ui:insert name="body">
+                <ui:insert name="body"   >
+                    
+                    <p:panel header="Login" rendered="#{!webUserController.logged}" >
+                        
+                        <p:panelGrid columns="3" >
+                            <p:outputLabel value="#{bundle.userName}" ></p:outputLabel>
+                            <p:spacer width="10" height="1" ></p:spacer>
+                            <p:inputText value="#{webUserController.userName}" ></p:inputText>
+                            <p:outputLabel value="#{bundle.password}" ></p:outputLabel>
+                            <p:spacer width="10" height="1" ></p:spacer>
+                            <p:inputText value="#{webUserController.password}" ></p:inputText>
+                            <p:spacer width="10" height="1" ></p:spacer>
+                            <p:spacer width="10" height="1" ></p:spacer>
+                            <p:commandButton ajax="false" value="#{bundle.login}" action="#{webUserController.login()}" ></p:commandButton>
+                            
+                        </p:panelGrid>
+                    
+                    </p:panel>
 
                 </ui:insert>
             </p:layoutUnit>

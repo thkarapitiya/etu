@@ -23,6 +23,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 @Named("webUserController")
 @SessionScoped
@@ -30,6 +31,12 @@ public class WebUserController implements Serializable {
 
     @EJB
     private etu.sessionbean.WebUserFacade ejbFacade;
+    
+    
+    @Inject
+    DepartmentController departmentController;
+    
+    
     private List<WebUser> items = null;
     private WebUser selected;
 
@@ -54,7 +61,7 @@ public class WebUserController implements Serializable {
         }
         logged=true;
         loggedUnit = loggedUser.getUnit();
-        
+        loggedDepartments = departmentController.getDepartments(loggedUnit);
     }
 
     public void logout() {
@@ -174,6 +181,32 @@ public class WebUserController implements Serializable {
         this.loggedDepartments = loggedDepartments;
     }
 
+    public boolean isLogged() {
+        return logged;
+    }
+
+    public void setLogged(boolean logged) {
+        this.logged = logged;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    
+    
     public WebUser getWebUser(java.lang.Long id) {
         return getFacade().find(id);
     }
