@@ -60,8 +60,121 @@ public class Encounter implements Serializable {
     Department department;
     @ManyToOne
     Unit unit;
+
+    public Date getEncounterData() {
+        return encounterData;
+    }
+
+    public void setEncounterData(Date encounterData) {
+        this.encounterData = encounterData;
+    }
+
+    public Date getEncounterTime() {
+        return encounterTime;
+    }
+
+    public void setEncounterTime(Date encounterTime) {
+        this.encounterTime = encounterTime;
+    }
+
+    public Date getEncounterDateTime() {
+        return encounterDateTime;
+    }
+
+    public void setEncounterDateTime(Date encounterDateTime) {
+        this.encounterDateTime = encounterDateTime;
+    }
+
+    public EncounterType getEncounterType() {
+        return encounterType;
+    }
+
+    public void setEncounterType(EncounterType encounterType) {
+        this.encounterType = encounterType;
+    }
+
+    public Date getEncounterFromData() {
+        return encounterFromData;
+    }
+
+    public void setEncounterFromData(Date encounterFromData) {
+        this.encounterFromData = encounterFromData;
+    }
+
+    public Date getEncounterFromTime() {
+        return encounterFromTime;
+    }
+
+    public void setEncounterFromTime(Date encounterFromTime) {
+        this.encounterFromTime = encounterFromTime;
+    }
+
+    public Date getEncounterFromDateTime() {
+        return encounterFromDateTime;
+    }
+
+    public void setEncounterFromDateTime(Date encounterFromDateTime) {
+        this.encounterFromDateTime = encounterFromDateTime;
+    }
+
+    public Date getEncounterToData() {
+        return encounterToData;
+    }
+
+    public void setEncounterToData(Date encounterToData) {
+        this.encounterToData = encounterToData;
+    }
+
+    public Date getEncounterToTime() {
+        return encounterToTime;
+    }
+
+    public void setEncounterToTime(Date encounterToTime) {
+        this.encounterToTime = encounterToTime;
+    }
+
+    public Date getEncounterToDateTime() {
+        return encounterToDateTime;
+    }
+
+    public void setEncounterToDateTime(Date encounterToDateTime) {
+        this.encounterToDateTime = encounterToDateTime;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public WebUser getStaf() {
+        return staf;
+    }
+
+    public void setStaf(WebUser staf) {
+        this.staf = staf;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
             
-            
+
+    
 
     public Long getId() {
         return id;

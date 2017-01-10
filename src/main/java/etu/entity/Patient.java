@@ -5,11 +5,15 @@
  */
 package etu.entity;
 
+import etu.enums.EncounterFindingCategory;
+import etu.enums.EncounterFindingDataType;
+import etu.enums.EncounterFindingType;
 import etu.enums.Gender;
 import etu.enums.Investigation;
 import etu.enums.Outcome;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -55,8 +59,142 @@ public class Patient implements Serializable {
     @Enumerated(EnumType.STRING)
     private Investigation investigation;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    Encounter initialEncounter;
+    @OneToOne(cascade = CascadeType.ALL)
+    EncounterFinding sbp;
+    @OneToOne(cascade = CascadeType.ALL)
+    EncounterFinding dbp;
+    @OneToOne(cascade = CascadeType.ALL)
+    EncounterFinding pr;
+    @OneToOne(cascade = CascadeType.ALL)
+    EncounterFinding rr;
+    @OneToOne(cascade = CascadeType.ALL)
+    EncounterFinding gcs;
+    @OneToOne(cascade = CascadeType.ALL)
+    EncounterFinding saturation;
+    @OneToOne(cascade = CascadeType.ALL)
+    EncounterFinding admissionDetails;
+
     @Temporal(javax.persistence.TemporalType.DATE)
     Date dob;
+
+    public Encounter getInitialEncounter() {
+        if (initialEncounter == null) {
+            initialEncounter = new Encounter();
+            initialEncounter.setPatient(this);
+        }
+        return initialEncounter;
+    }
+
+    public void setInitialEncounter(Encounter initialEncounter) {
+        this.initialEncounter = initialEncounter;
+    }
+
+    public EncounterFinding getSbp() {
+        if (sbp == null) {
+            sbp = new EncounterFinding();
+            sbp.setEncounter(this.getInitialEncounter());
+            sbp.setEncounterFindingCategory(EncounterFindingCategory.examination);
+            sbp.setEncounterFindingDataType(EncounterFindingDataType.doubleData);
+            sbp.setEncounterFindingType(EncounterFindingType.sbp);
+        }
+        return sbp;
+    }
+
+    public void setSbp(EncounterFinding sbp) {
+        this.sbp = sbp;
+    }
+
+    public EncounterFinding getDbp() {
+        if (dbp == null) {
+            dbp = new EncounterFinding();
+            dbp.setEncounter(this.getInitialEncounter());
+            dbp.setEncounterFindingCategory(EncounterFindingCategory.examination);
+            dbp.setEncounterFindingDataType(EncounterFindingDataType.doubleData);
+            dbp.setEncounterFindingType(EncounterFindingType.dbp);
+        }
+        return dbp;
+    }
+
+    public void setDbp(EncounterFinding dbp) {
+        this.dbp = dbp;
+    }
+
+    public EncounterFinding getPr() {
+        if (pr == null) {
+            pr = new EncounterFinding();
+            pr.setEncounter(this.getInitialEncounter());
+            pr.setEncounterFindingCategory(EncounterFindingCategory.examination);
+            pr.setEncounterFindingDataType(EncounterFindingDataType.doubleData);
+            pr.setEncounterFindingType(EncounterFindingType.pr);
+        }
+        return pr;
+    }
+
+    public void setPr(EncounterFinding pr) {
+        this.pr = pr;
+    }
+
+    public EncounterFinding getRr() {
+        if (rr == null) {
+            rr = new EncounterFinding();
+            rr.setEncounter(this.getInitialEncounter());
+            rr.setEncounterFindingCategory(EncounterFindingCategory.examination);
+            rr.setEncounterFindingDataType(EncounterFindingDataType.doubleData);
+            rr.setEncounterFindingType(EncounterFindingType.rr);
+        }
+        return rr;
+    }
+
+    public void setRr(EncounterFinding rr) {
+        this.rr = rr;
+    }
+
+    public EncounterFinding getGcs() {
+        if (gcs == null) {
+            gcs = new EncounterFinding();
+            gcs.setEncounter(this.getInitialEncounter());
+            gcs.setEncounterFindingCategory(EncounterFindingCategory.examination);
+            gcs.setEncounterFindingDataType(EncounterFindingDataType.doubleData);
+            gcs.setEncounterFindingType(EncounterFindingType.gcs);
+        }
+        return gcs;
+    }
+
+    public void setGcs(EncounterFinding gcs) {
+        this.gcs = gcs;
+    }
+
+    public EncounterFinding getSaturation() {
+        if (saturation == null) {
+            saturation = new EncounterFinding();
+            saturation.setEncounter(this.getInitialEncounter());
+            saturation.setEncounterFindingCategory(EncounterFindingCategory.investigation);
+            saturation.setEncounterFindingDataType(EncounterFindingDataType.doubleData);
+            saturation.setEncounterFindingType(EncounterFindingType.saturation);
+        }
+        return saturation;
+    }
+
+    public void setSaturation(EncounterFinding saturation) {
+        this.saturation = saturation;
+    }
+
+    public EncounterFinding getAdmissionDetails() {
+        if (admissionDetails == null) {
+            admissionDetails = new EncounterFinding();
+            admissionDetails.setEncounter(this.getInitialEncounter());
+            admissionDetails.setEncounterFindingCategory(EncounterFindingCategory.history);
+            admissionDetails.setEncounterFindingDataType(EncounterFindingDataType.textData);
+            admissionDetails.setEncounterFindingType(EncounterFindingType.other);
+        }
+        return admissionDetails;
+    }
+
+    public void setAdmissionDetails(EncounterFinding admissionDetails) {
+        this.admissionDetails = admissionDetails;
+    }
 
     public Date getDob() {
         return dob;
@@ -65,10 +203,7 @@ public class Patient implements Serializable {
     public void setDob(Date dob) {
         this.dob = dob;
     }
-    
-    
-    
-    
+
     public Long getId() {
         return id;
     }
