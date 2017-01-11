@@ -28,9 +28,11 @@
                 <ui:insert name="menu">
                     <p:growl id="growl" autoUpdate="true" ></p:growl>
                     <h:form >
-                        <p:menubar id="loggedMenu" rendered="#{webUserController.logged}" >
+                        <p:menubar id="loggedMenu"  >
                             <p:submenu label="Admissions" >
                                 <p:menuitem ajax="false" action="#{patientController.admit()}" value="Admit" ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{patientController.listCurrentPatients()}" value="Current Admissions" ></p:menuitem>
+                                <p:menuitem ajax="false" action="#{patientController.admit()}" value="Search" ></p:menuitem>
                             </p:submenu>
                             <p:submenu label="Administration" >
                                 <p:menuitem ajax="false" action="/admin_index" value="Adminstration" ></p:menuitem>
@@ -39,9 +41,9 @@
                     </h:form>
                 </ui:insert>
                 <ui:insert name="body"   >
-                    
-                    <p:panel header="Login" rendered="#{!webUserController.logged}" >
-                        
+
+                    <p:panel header="Login" rendered="false" >
+
                         <p:panelGrid columns="3" >
                             <p:outputLabel value="#{bundle.userName}" ></p:outputLabel>
                             <p:spacer width="10" height="1" ></p:spacer>
@@ -52,9 +54,9 @@
                             <p:spacer width="10" height="1" ></p:spacer>
                             <p:spacer width="10" height="1" ></p:spacer>
                             <p:commandButton ajax="false" value="#{bundle.login}" action="#{webUserController.login()}" ></p:commandButton>
-                            
+
                         </p:panelGrid>
-                    
+
                     </p:panel>
 
                 </ui:insert>

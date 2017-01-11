@@ -6,7 +6,9 @@ import etu.controller.util.JsfUtil.PersistAction;
 import etu.sessionbean.PatientFacade;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +31,7 @@ public class PatientController implements Serializable {
     @Inject
     WebUserController webUserController;
     private List<Patient> items = null;
+    private List<Patient> currentPatients = null;
     private Patient selected;
 
     public PatientController() {
@@ -64,24 +67,51 @@ public class PatientController implements Serializable {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
+
+    public String admit() {
+        selected = new Patient();
+        selected.setActive(true);
+        return "/admit";
+    }
     
-     public String admit() {
+    public String listCurrentPatients(){
+        String j = "select p from Patient p where p.active=:act";
+        Map m = new HashMap();
+        m.put("act", true);
+        currentPatients = getFacade().findBySQL(j,m);
+        return "/current_patients";
+    }
+
+    public String saveAdmit() {
+        getFacade().create(selected);
+        JsfUtil.addSuccessMessage("Patient Admitted");
         selected = new Patient();
         selected.setActive(true);
         return "/admit";
     }
 
     public void update() {
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("PatientUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("Updated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("PatientDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("Deleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
+
+    public List<Patient> getCurrentPatients() {
+        return currentPatients;
+    }
+
+    public void setCurrentPatients(List<Patient> currentPatients) {
+        this.currentPatients = currentPatients;
+    }
+    
+    
+    
 
     public List<Patient> getItems() {
         if (items == null) {
@@ -109,11 +139,11 @@ public class PatientController implements Serializable {
                 if (msg.length() > 0) {
                     JsfUtil.addErrorMessage(msg);
                 } else {
-                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                    JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("Error"));
                 }
             } catch (Exception ex) {
                 Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
+                JsfUtil.addErrorMessage(ex, ResourceBundle.getBundle("/Bundle").getString("Error"));
             }
         }
     }

@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./template.xhtml">
+
+            <ui:define name="body">
+                <f:view>
+
+
+                    <h:form>
+                        <h1><h:outputText value="List"/></h1>
+                        <p:dataTable value="#{patientController.currentPatients}" var="item">
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Dob"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dob}">
+                                    <f:convertDateTime pattern="dd/MMM/yyyy" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Name"/>
+                                </f:facet>
+                                <h:outputText value="#{item.ename}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="BhtNo"/>
+                                </f:facet>
+                                <h:outputText value="#{item.bhtNo}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Age"/>
+                                </f:facet>
+                                <h:outputText value="#{item.age}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Gender"/>
+                                </f:facet>
+                                <h:outputText value="#{item.gender}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Area"/>
+                                </f:facet>
+                                <h:outputText value="#{item.area}"/>
+                            </p:column>
+
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="PR"/>
+                                </f:facet>
+                                <h:outputText value="#{item.pr}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="BP"/>
+                                </f:facet>
+                                <h:outputText value="#{item.sbp}"/>
+                                <h:outputLabel value="/" ></h:outputLabel>
+                                <h:outputText value="#{item.dbp}"/>
+                                <h:outputLabel value="mmHg" ></h:outputLabel>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="RR"/>
+                                </f:facet>
+                                <h:outputText value="#{item.rr}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="GCS"/>
+                                </f:facet>
+                                <h:outputText value="#{item.gcs}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Saturation"/>
+                                </f:facet>
+                                <h:outputText value="#{item.saturation}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Details"/>
+                                </f:facet>
+                                <h:outputText value="#{item.admissionDetails}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="PatientCondition"/>
+                                </f:facet>
+                                <h:outputText value="#{item.patientCondition}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="TriageCategory"/>
+                                </f:facet>
+                                <h:outputText value="#{item.triageCategory}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Department"/>
+                                </f:facet>
+                                <h:outputText value="#{item.department}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Unit"/>
+                                </f:facet>
+                                <h:outputText value="#{item.unit}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Outcome"/>
+                                </f:facet>
+                                <h:outputText value="#{item.outcome}"/>
+                            </p:column>
+                            <p:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Investigation"/>
+                                </f:facet>
+                                <h:outputText value="#{item.investigation}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </f:view>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

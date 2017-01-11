@@ -7,6 +7,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 
+    <h:outputStylesheet library="css" name="default.css"/>
     <ui:define name="body">
 
         <f:view>
@@ -14,50 +15,94 @@
 
 
             <h:form>
-                <h1><h:outputText value="#{bundle.Admit}"/></h1>
-                <p:panelGrid columns="2">
-                    <p:outputLabel value="#{bundle.sname}" for="sname" rendered="false"/>
-                    <p:inputText id="sname" value="#{patientController.selected.sname}" title="#{bundle.sname}"  rendered="false"/>
-                    <p:outputLabel value="#{bundle.tname}" for="tname"  rendered="false"/>
-                    <p:inputText id="tname" value="#{patientController.selected.tname}" title="Name in Tamil"  rendered="false"/>
-                    <p:outputLabel value="#{bundle.ename}" for="ename" />
-                    <p:inputText id="ename" value="#{patientController.selected.ename}" title="Ename" />
-                    <p:outputLabel value="#{bundle.bhtNo}" for="bhtNo" />
-                    <p:inputText id="bhtNo" value="#{patientController.selected.bhtNo}" title="BhtNo" />
-                    <p:outputLabel value="#{bundle.dob}" for="age" />
-                    <p:calendar id="age" value="#{patientController.selected.dob}" title="Age" pattern="dd MMMM yyyy" />
+
+
+                <p:panel header="#{bundle.Admit}" >
                     
-                    <p:outputLabel value="#{bundle.gender}" for="gender" />
-                    <p:selectOneMenu id="gender" value="#{patientController.selected.gender}" >
-                        <f:selectItems value="#{enumController.genderValues}" ></f:selectItems>
-                    </p:selectOneMenu>
-                    <p:outputLabel value="#{bundle.area}" for="area" />
-                    <p:selectOneMenu id="area" value="#{patientController.selected.area}" >
-                        <f:selectItems value="#{categoryController.areas}" var="a" itemLabel="#{a.ename}" itemValue="#{a}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel value="Patient Condition:" for="patientCondition" />
-                    <p:selectOneMenu id="patientCondition" value="#{patientController.selected.patientCondition}" >
-                        <f:selectItems value="#{categoryController.patientConditions}" var="p" itemLabel="#{p.ename}" itemValue="#{p}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel value="Initial Triage Category:" for="triageCategory" />
-                    <p:selectOneMenu id="triageCategory" value="#{patientController.selected.triageCategory}" >
-                        <f:selectItems value="#{categoryController.triageCategories}" var="t" itemLabel="#{t.ename}" itemValue="#{t}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel value="Department:" for="department" />
-                    <p:selectOneMenu id="department" value="#{patientController.selected.department}" >
-                        <f:selectItems value="#{departmentController.items}" var="d" itemLabel="#{d.ename}" itemValue="#{d}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel value="Unit:" for="unit" />
-                    <p:selectOneMenu id="unit" value="#{patientController.selected.unit}" >
-                        <f:selectItems value="#{unitController.items}" var="u" itemLabel="#{u.ename}" itemValue="#{u}"/>
-                    </p:selectOneMenu>
-                    <p:outputLabel value="Outcome:" for="outcome" />
-                    <p:selectOneMenu id="outcome" value="#{patientController.selected.outcome}" >
-                        <f:selectItems value="#{enumController.patientsOutcomes}" />
-                    </p:selectOneMenu>
-                    <p:outputLabel value="Investigation:" for="investigation" />
-                    <p:inputText id="investigation" value="#{patientController.selected.investigation}" title="Investigation" />
-                </p:panelGrid>
+                    <f:facet name="header" >
+                        <p:outputLabel value="#{bundle.Admit}"  ></p:outputLabel>
+                        <p:commandButton value="Admit" ajax="false" action="#{patientController.saveAdmit()}"></p:commandButton>
+                    </f:facet>
+                    
+                    
+                    <h:panelGrid columns="2" columnClasses="alignTop,alignTop">
+
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="#{bundle.sname}" for="sname" rendered="false"/>
+                            <p:inputText id="sname" value="#{patientController.selected.sname}" title="#{bundle.sname}"  rendered="false"/>
+                            <p:outputLabel value="#{bundle.tname}" for="tname"  rendered="false"/>
+                            <p:inputText id="tname" value="#{patientController.selected.tname}" title="Name in Tamil"  rendered="false"/>
+                            <p:outputLabel value="#{bundle.Ename}" for="ename" />
+                            <p:inputText id="ename" value="#{patientController.selected.ename}" title="Ename" />
+                            <p:outputLabel value="#{bundle.bhtNo}" for="bhtNo" />
+                            <p:inputText id="bhtNo" value="#{patientController.selected.bhtNo}" title="BhtNo" />
+                            <p:outputLabel value="#{bundle.dob}" for="age" />
+                            <p:calendar id="age" value="#{patientController.selected.dob}" title="Age" pattern="dd MMMM yyyy" navigator="true" />
+
+                            <p:outputLabel value="#{bundle.gender}" for="gender" />
+                            <p:selectOneMenu id="gender" value="#{patientController.selected.gender}" >
+                                <f:selectItems value="#{enumController.genderValues}" ></f:selectItems>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="#{bundle.area}" for="area" />
+                            <p:selectOneMenu id="area" value="#{patientController.selected.area}" >
+                                <f:selectItems value="#{categoryController.areas}" var="a" itemLabel="#{a.ename}" itemValue="#{a}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Patient Condition:" for="patientCondition" />
+                            <p:selectOneMenu id="patientCondition" value="#{patientController.selected.patientCondition}" >
+                                <f:selectItems value="#{categoryController.patientConditions}" var="p" itemLabel="#{p.ename}" itemValue="#{p}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Initial Triage Category:" for="triageCategory" />
+                            <p:selectOneMenu id="triageCategory" value="#{patientController.selected.triageCategory}" >
+                                <f:selectItems value="#{categoryController.triageCategories}" var="t" itemLabel="#{t.ename}" itemValue="#{t}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Department:" for="department" />
+                            <p:selectOneMenu id="department" value="#{patientController.selected.department}" >
+                                <f:selectItems value="#{departmentController.items}" var="d" itemLabel="#{d.ename}" itemValue="#{d}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Unit:" for="unit" />
+                            <p:selectOneMenu id="unit" value="#{patientController.selected.unit}" >
+                                <f:selectItems value="#{unitController.items}" var="u" itemLabel="#{u.ename}" itemValue="#{u}"/>
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Outcome:" for="outcome" />
+                            <p:selectOneMenu id="outcome" value="#{patientController.selected.outcome}" >
+                                <f:selectItems value="#{enumController.patientsOutcomes}" />
+                            </p:selectOneMenu>
+                            <p:outputLabel value="Investigation:" for="investigation" />
+                            <p:inputText id="investigation" value="#{patientController.selected.investigation}" title="Investigation" />
+                        </p:panelGrid>
+
+                        <p:panelGrid columns="3" columnClasses="alignTop,alignTop,alignTop" >
+
+                            <p:outputLabel value="PR" ></p:outputLabel>
+                            <p:spacer width="5" height="1" ></p:spacer>
+                            <p:inputText value="#{patientController.selected.pr.doubleValue}" ></p:inputText>
+
+                            <p:outputLabel value="SBP" ></p:outputLabel>
+                            <p:spacer width="5" height="1" ></p:spacer>
+                            <p:inputText value="#{patientController.selected.sbp.doubleValue}" ></p:inputText>
+
+
+                            <p:outputLabel value="DBP" ></p:outputLabel>
+                            <p:spacer width="5" height="1" ></p:spacer>
+                            <p:inputText value="#{patientController.selected.dbp.doubleValue}" ></p:inputText>
+
+
+                            <p:outputLabel value="PR" ></p:outputLabel>
+                            <p:spacer width="5" height="1" ></p:spacer>
+                            <p:inputText value="#{patientController.selected.rr.doubleValue}" ></p:inputText>
+
+                            <p:outputLabel value="PR" ></p:outputLabel>
+                            <p:spacer width="5" height="1" ></p:spacer>
+                            <p:inputText value="#{patientController.selected.pr.doubleValue}" ></p:inputText>
+
+                            <p:outputLabel value="Details" ></p:outputLabel>
+                            <p:spacer width="5" height="1" ></p:spacer>
+                            <p:inputTextarea value="#{patientController.selected.admissionDetails.textValue}" ></p:inputTextarea>
+
+                        </p:panelGrid>
+
+                    </h:panelGrid>
+                </p:panel>
             </h:form>
         </f:view>
 
